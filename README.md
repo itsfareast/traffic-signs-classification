@@ -14,10 +14,11 @@
 
 - To strengthen the predictions of this convolutional neural network, I think we should feed it more data. Some of the classes were represented far more than others. The lack of balance in the training data set with result in a bias towards classes with more data points. We can generate "fake" data points for less represented classes by applying small but random translational and rotational shifts as well as shearing and warping.
 
-- Preprocessing the data can be made more faster by using better localized histogram equalization techniques and also
-no longer normalizing the values to be floats within the range of 0 to 1. Using integers between 0, 255 might be sufficient.
+- Preprocessing the data can be made more faster by using better localized histogram equalization techniques and also no longer normalizing the values to be floats within the range of 0 to 1. Using integers between 0, 255 might be sufficient.
 
 - Visualizing the networks weights can also help in designing the achitecture by plotting the weights filters of the convolutional later as gray scale images
+
+- Check the data points which are incorrectly predicted by the system
 
 - Experimenting with hyperparameters and other architectures
 
