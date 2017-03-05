@@ -1,5 +1,5 @@
 
-### In this project, I have used what you've learned about deep neural networks and convolutional neural networks to classify traffic signs in using the TensorFlow framework.  This project is submitted as partial fulfillment of the requirements in order to pass the first term of Udacity's self-driving car engineer nano degree program.
+### In this project, I have used what you've learned about deep neural networks and convolutional neural networks to classify german traffic signs using the TensorFlow framework.  This project is submitted as partial fulfillment of the requirements in order to pass the first term of Udacity's self-driving car engineer nano degree program.
 
 *Jupyter Notebook*
 - https://github.com/mithi/self-driving-project-2/blob/master/submission/Traffic_Sign_Classifier.ipynb
