@@ -29,7 +29,7 @@ This convolutional neural network is a modified version of this code as presente
 
 Datasets used publicly available here
 - http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset 
-- https://d17h27t6h515a5.cloudfront.et/topher/2016/November/581faac4_traffic-si gns-data/traffic-signs-data.zip
+- https://d17h27t6h515a5.cloudfront.et/topher/2016/November/581faac4_traffic-signs-data/traffic-signs-data.zip
 
 ### Good Readings
 
