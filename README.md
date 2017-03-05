@@ -13,16 +13,12 @@
 ### Recommendations
 
 - To strengthen the predictions of this convolutional neural network, I think we should feed it more data. Some of the classes were represented far more than others. The lack of balance in the training data set results in a bias towards classes with more data points. We can generate "fake" data points for less represented classes by applying small but random translational and rotational shifts as well as shearing and warping.
-
 - Preprocessing the data can be made more faster by using better localized histogram equalization techniques and also no longer normalizing the values to be floats within the range of 0 to 1. Using integers between 0, 255 might be sufficient.
-
-- Visualizing the networks weights can also help in designing the achitecture. Visualize them by plotting the weights filters of the convolutional layers as grayscale images
-
+- Visualizing the network weights can also help in designing the architecture. Visualize them by plotting the weights filters of the convolutional layers as grayscale images
 - Check the data points which are incorrectly predicted by the system and try to analyze this information
+- Experiment with hyperparameters and other architectures.Try fiddling with the filter size of the convolutional layers as well as its output/output depth, you can also fiddle with the output size of the fully connected layers and the dropout probability.
+- Use L2 regulation and early stopper techniques to prevent overfitting. Also play around with different types of optimizer function.
 
-- Experiment with hyperparameters and other architectures.Try fiddling with the filter size of the convolutional layers as well as its output/output depth, you can also fiddle with the output size of the fully connected layers and the dropout probability. 
-
--  Use L2 regulation techniques to prevent overfitting. Also play around with different types of optimizer function.
 
 
 ### Miscellaneous
