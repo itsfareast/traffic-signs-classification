@@ -20,7 +20,10 @@
 
 - Check the data points which are incorrectly predicted by the system and try to analyze this information
 
-- Experiment with hyperparameters and other architectures
+- Experiment with hyperparameters and other architectures.Try fiddling with the filter size of the convolutional layers as well as its output/output depth, you can also fiddle with the output size of the fully connected layers and the dropout probability. 
+
+-  Use L2 regulation techniques to prevent overfitting. Also play around with different types of optimizer function.
+
 
 ### Miscellaneous
 
