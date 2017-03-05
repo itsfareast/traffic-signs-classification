@@ -16,9 +16,9 @@
 
 - Preprocessing the data can be made more faster by using better localized histogram equalization techniques and also no longer normalizing the values to be floats within the range of 0 to 1. Using integers between 0, 255 might be sufficient.
 
-- Visualizing the networks weights can also help in designing the achitecture by plotting the weights filters of the convolutional later as gray scale images
+- Visualizing the networks weights can also help in designing the achitecture. Visualize them by plotting the weights filters of the convolutional layers as grayscale images
 
-- Check the data points which are incorrectly predicted by the system
+- Check the data points which are incorrectly predicted by the system and try to analyze this information
 
 - Experiment with hyperparameters and other architectures
 
