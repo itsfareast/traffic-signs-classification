@@ -179,8 +179,8 @@ print("Number of classes =", n_classes)
 # an images of the same class occupies. 
 
 classes_lineup = []
-count_per_class = [0]*n_classes
-running_counts = [0]*n_classes
+count_per_class = [0] * n_classes
+running_counts = [0] * n_classes
 class_names = []
 
 for i in range(0, len(y_train)):
@@ -204,7 +204,8 @@ with open(class_name_file) as _f:
 # In[17]:
 
 def show_images(X, end, total, images_per_row = 30, images_per_col = 15,
-                H = 20, W = 1, its_gray = False):    
+                H = 20, W = 1, its_gray = False): 
+    
     number_of_images = images_per_row * images_per_col
     figure, axis = plt.subplots(images_per_col, images_per_row, figsize=(H, W))
     figure.subplots_adjust(hspace = .2, wspace=.001)
@@ -249,26 +250,21 @@ for n in classes_lineup:
 # In[15]:
 
 #PLOT 350 RANDOM IMAGES from training set
-show_images(X_train, len(X_train), len(X_train), 
-            images_per_row = 30, images_per_col = 15, 
-            H = 20, W = 10)
+show_images(X_train, len(X_train), len(X_train), images_per_row = 30, images_per_col = 15, H = 20, W = 10)
 
 
 # In[18]:
 
 #PLOT 350 RANDOM IMAGES from PREPROCESSED training set
 i = np.copy(X_train_preprocessed)
-
-show_images(i, len(i), len(i), images_per_row = 30, images_per_col = 15, 
-            H = 20, W = 10, its_gray = True)
+show_images(i, len(i), len(i), images_per_row = 30, images_per_col = 15, H = 20, W = 10, its_gray = True)
 
 
 # In[19]:
 
 #PLOT 10 RANDOM IMAGES each per classification
 for n in classes_lineup:
-    show_images(X_train, running_counts[n], count_per_class[n], 
-                images_per_row = 10, images_per_col = 1, H = 10, W = 10)
+    show_images(X_train, running_counts[n], count_per_class[n], images_per_row = 10, images_per_col = 1, H = 10, W = 10)
 
 
 # In[20]:
@@ -320,9 +316,9 @@ output_size = 43 #number of classifiers/labels - n_classes
 c = 1         
 fs1 = 5       
 fs2 = 5        
-depth1 = 64  #32
-depth2 = 32  #64
-fc_out = 256 #1024
+depth1 = 64  
+depth2 = 32  
+fc_out = 256 
 
 
 weights = {
@@ -339,10 +335,13 @@ biases = {
     'bf2': tf.Variable(tf.zeros(output_size))
 }
 
-#CONV1_INPUT: 32x32x1 OUTPUT:32x32xdepth1 MAXPOOLOUTPUT: 16x16xdepth1
-#CONV2_INPUT: 16x16xdepth1 OUTPUT: 16x16xdepth2 MAXPOOLOUTPUT: 8x8xdepth2
-#FC1_INPUT: 8x8xdepth2 OUTPUT: 8x8xdepth2
-#FC1_INPUT: 8x8xdepth2 OUTPUT: n_classes
+#INPUT: 32x32x1
+#CONV1_OUTPUT:32x32xdepth1 
+#MAXPOOLOUTPUT: 16x16xdepth1
+#CONV2_OUTPUT: 16x16xdepth2 
+#MAXPOOLOUTPUT: 8x8xdepth2
+#FC1_OUTPUT: fc_out
+#FC1_OUTPUT: n_classes
 
 
 # In[24]:
@@ -397,7 +396,7 @@ def evaluate(X_data, y_data):
     for start in range(0, total_samples, BATCH_SIZE):        
         batch_x, batch_y = get_batch(X_data, y_data, start, BATCH_SIZE) 
         params = {x: batch_x, y: batch_y, keep_prob: 1.0}
-        accuracy = sess.run(ACCURACY_OPERATION, feed_dict= params)
+        accuracy = sess.run(ACCURACY_OPERATION, feed_dict = params)
         total_accuracy += (accuracy * len(batch_x))
     
     return total_accuracy / total_samples
@@ -419,7 +418,7 @@ with tf.Session() as sess:
             
             batch_x, batch_y = get_batch(X_data, y_data, start, BATCH_SIZE)
             params = {x: batch_x, y: batch_y, keep_prob: 0.75, LR: LEARNING_RATE}
-            _, loss = sess.run([TRAINING_OPERATION, LOSS_OPERATION], feed_dict = params)
+            _ , loss = sess.run([TRAINING_OPERATION, LOSS_OPERATION], feed_dict = params)
             
         validation_accuracy = evaluate(X_valid_preprocessed, y_valid)
         
@@ -452,10 +451,14 @@ with tf.Session() as sess:
 # LOAD THE NEW IMAGES FROM THE INTERNET TO A NUMPY ARRAY
 
 path = 'data/'
-image_name = ['0-20speed','1-30speed',
-              '12-priority-road','13-yield',
-              '14-stop','17-no-entry',
-              '18-general-caution','3-60speed',
+image_name = ['0-20speed',
+              '1-30speed',
+              '12-priority-road',
+              '13-yield',
+              '14-stop',
+              '17-no-entry',
+              '18-general-caution',
+              '3-60speed',
               '36-go-straight-right', 
               '40-roundabout-mandatory']
 
@@ -469,6 +472,7 @@ for name in image_name:
 own_set_x = np.array(image_list)
 own_set_x = preprocess(own_set_x)
 own_set_x = reshape(own_set_x)
+
 own_set_y = np.array([0, 1, 12, 13, 14, 17, 18, 3, 36, 40])
 print(own_set_x.shape, own_set_y.shape)
 
@@ -478,8 +482,8 @@ print(own_set_x.shape, own_set_y.shape)
 #show selected image from internet 
 
 number_of_images = len(image_list)
-figure, axis = plt.subplots(1, number_of_images, figsize=(20, 20))
-figure.subplots_adjust(hspace = .2, wspace=.001)
+figure, axis = plt.subplots(1, number_of_images, figsize = (20, 20))
+figure.subplots_adjust(hspace = .2, wspace =.001)
 axis = axis.ravel()
     
 for i in range(number_of_images):     
@@ -494,13 +498,13 @@ for i in range(number_of_images):
 
 with tf.Session() as sess:
     saver.restore(sess, tf.train.latest_checkpoint('.'))
-    OUT = sess.run(tf.argmax(logits, 1), feed_dict={x: own_set_x, y: own_set_y, keep_prob: 1.0})
+    OUT = sess.run(tf.argmax(logits, 1), feed_dict = {x: own_set_x, y: own_set_y, keep_prob: 1.0})
     print("", OUT, "<-predictions")
     print("", own_set_y, "<-actual")
 
 with tf.Session() as sess:
     saver.restore(sess, tf.train.latest_checkpoint('.'))
-    OUT = sess.run(tf.nn.top_k(tf.nn.softmax(logits), 5), feed_dict={x: own_set_x, y: own_set_y, keep_prob: 1.0})
+    OUT = sess.run(tf.nn.top_k(tf.nn.softmax(logits), 5), feed_dict = {x: own_set_x, y: own_set_y, keep_prob: 1.0})
     print(OUT[1].T)
     print("(top  5 predictions above) for each image")
     
