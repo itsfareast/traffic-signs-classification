@@ -7,8 +7,8 @@
 *Generated HTML*
 - https://github.com/mithi/self-driving-project-2/blob/master/submission/report.html
 
-*PDF Writeup*
-- https://github.com/mithi/self-driving-project-2/blob/master/submission/WRITEUP.pdf
+*PDF Writeup Ver2*
+- https://github.com/mithi/self-driving-project-2/blob/master/submission/WRITEUP_ver2.pdf
 
 ### Recommendations
 
@@ -17,7 +17,7 @@
 - Visualizing the network weights can also help in designing the architecture. Visualize them by plotting the weights filters of the convolutional layers as grayscale images
 - Check the data points which are incorrectly predicted by the system and try to analyze this information
 - Experiment with hyperparameters and other architectures.Try fiddling with the filter size of the convolutional layers as well as its output/output depth, you can also fiddle with the output size of the fully connected layers and the dropout probability.
-- Use L2 regulation and early stopper techniques to prevent overfitting. Also play around with different types of optimizer function.
+- Use L2 regulation and early stopper techniques to prevent overfitting. Also play around with different types of optimizer functions.
 
 
 
