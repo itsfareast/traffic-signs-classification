@@ -175,8 +175,8 @@ print("Number of classes =", n_classes)
 # We can also map the label value representation to actual human label from CSV file
 # in essence: y: 10 is the STOP sign
 # Notice that the data set is not shuffled, images with the same class are adjacent to each
-# other in the list. So a running count is useful to to know what range of position 
-# an images of the same class occupies. 
+# other in the list. So a running count is useful to know what range of position 
+# an image of the same class occupies. 
 
 classes_lineup = []
 count_per_class = [0] * n_classes
