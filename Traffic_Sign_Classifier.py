@@ -66,9 +66,9 @@ def reshape(x): # Add a single grayscale channel
 
 # In[4]:
 
-######################
-#!!   EDIT ME!   !! #
-####################
+##########################################################
+#!!   EDIT ME TO RESPECTIVE FILES PATHS              !! #
+########################################################
 
 class_name_file = './signnames.csv'
 training_file = "data/train.p"
@@ -98,7 +98,8 @@ X_test, y_test = test['features'], test['labels']
 
 # In[6]:
 
-# Preprocess the data to improve feature extraction... This might take a while..
+print("Preprocessing the data to improve feature extraction...")
+print("This might take a while...")
 
 X_preprocessed = preprocess(X_train)
 X_train_preprocessed = reshape(X_preprocessed)
@@ -122,7 +123,7 @@ pickle.dump(X_valid_preprocessed, open(validation_preprocessed_file, "wb" ))
 pickle.dump(X_test_preprocessed, open(testing_preprocessed_file, "wb" ))
 
 
-# In[6]:
+# In[8]:
 
 # If the preprocessed data exists, we can just open them up
 # no need to preprocess them everytime  
@@ -135,14 +136,14 @@ with open(testing_preprocessed_file, mode='rb') as f:
     X_test_preprocessed = pickle.load(f)
 
 
-# In[7]:
+# In[9]:
 
 ######################################
 #          DATA EXPLORATION         #
 ####################################
 
 
-# In[8]:
+# In[10]:
 
 # We can see some basic statistics about the data sets here 
 
@@ -168,7 +169,7 @@ print("Image data shape =", image_shape)
 print("Number of classes =", n_classes)
 
 
-# In[9]:
+# In[11]:
 
 # Let's count how many samples per classification the training set has
 # We can also map the label value representation to actual human label from CSV file
@@ -200,7 +201,7 @@ with open(class_name_file) as _f:
         class_names.append(row[1]) 
 
 
-# In[10]:
+# In[17]:
 
 def show_images(X, end, total, images_per_row = 30, images_per_col = 15,
                 H = 20, W = 1, its_gray = False):    
@@ -210,7 +211,7 @@ def show_images(X, end, total, images_per_row = 30, images_per_col = 15,
     axis = axis.ravel()
     
     for i in range(number_of_images):
-        index = random.randint(end - total, end)
+        index = random.randint(end - total, end - 1)
         image = X[index]
         axis[i].axis('off')
         if its_gray:
@@ -219,7 +220,7 @@ def show_images(X, end, total, images_per_row = 30, images_per_col = 15,
           axis[i].imshow(image)
 
 
-# In[11]:
+# In[13]:
 
 def plot_histogram(data, name):
   class_list = range(n_classes)
@@ -230,7 +231,7 @@ def plot_histogram(data, name):
   plt.show()
 
 
-# In[12]:
+# In[14]:
 
 # More useful statistics about the data set
 # value representation of that class/label 
@@ -253,7 +254,7 @@ show_images(X_train, len(X_train), len(X_train),
             H = 20, W = 10)
 
 
-# In[16]:
+# In[18]:
 
 #PLOT 350 RANDOM IMAGES from PREPROCESSED training set
 i = np.copy(X_train_preprocessed)
@@ -262,15 +263,15 @@ show_images(i, len(i), len(i), images_per_row = 30, images_per_col = 15,
             H = 20, W = 10, its_gray = True)
 
 
-# In[17]:
+# In[19]:
 
 #PLOT 10 RANDOM IMAGES each per classification
 for n in classes_lineup:
     show_images(X_train, running_counts[n], count_per_class[n], 
-                images_per_row = 10, images_per_col = 1, H = 20, W = 20)
+                images_per_row = 10, images_per_col = 1, H = 10, W = 10)
 
 
-# In[18]:
+# In[20]:
 
 #PLOT HISTOGRAM OF EACH DATA SET
 plot_histogram(y_train, name = "TRAINING SET: number of data points per class")
@@ -278,14 +279,14 @@ plot_histogram(y_valid, name = "CROSS VALIDATION SET: number of data points per 
 plot_histogram(y_test, name = "TEST SET: number of data points per class")
 
 
-# In[13]:
+# In[21]:
 
 ######################################
 #      NETWORK ARCHITECTURE         #
 ####################################
 
 
-# In[14]:
+# In[22]:
 
 def convolution(x, W, b, s = 1, with_relu = True, with_maxpool = False):
     result = tf.nn.conv2d(x, W, strides = [1, s, s, 1], padding = 'SAME')
@@ -313,7 +314,7 @@ def network(x, W, b, dropout_prob):
     return r 
 
 
-# In[15]:
+# In[23]:
 
 output_size = 43 #number of classifiers/labels - n_classes
 c = 1         
@@ -344,14 +345,14 @@ biases = {
 #FC1_INPUT: 8x8xdepth2 OUTPUT: n_classes
 
 
-# In[16]:
+# In[24]:
 
 ################################################
 #      NETWORK TRAINING     AND TESTING       #
 ##############################################
 
 
-# In[17]:
+# In[25]:
 
 LEARNING_RATE = 0.00005
 
@@ -381,7 +382,7 @@ CORRECT_PREDICTION_OPERATION = tf.equal(INFERENCE_OPERATION, tf.argmax(one_hot_y
 ACCURACY_OPERATION = tf.reduce_mean(tf.cast(CORRECT_PREDICTION_OPERATION, tf.float32))
 
 
-# In[18]:
+# In[26]:
 
 def get_batch(X_data, y_data, start, BATCH_SIZE):
     end = start + BATCH_SIZE
@@ -399,10 +400,10 @@ def evaluate(X_data, y_data):
         accuracy = sess.run(ACCURACY_OPERATION, feed_dict= params)
         total_accuracy += (accuracy * len(batch_x))
     
-    return total_cost/ total_samples, total_accuracy / total_samples
+    return total_accuracy / total_samples
 
 
-# In[19]:
+# In[27]:
 
 # TRAIN THE MODEL
 
@@ -418,18 +419,18 @@ with tf.Session() as sess:
             
             batch_x, batch_y = get_batch(X_data, y_data, start, BATCH_SIZE)
             params = {x: batch_x, y: batch_y, keep_prob: 0.75, LR: LEARNING_RATE}
-            _, loss = sess.run([TRAINING_OPERATION, LOSS_OPRATION], feed_dict = params)
+            _, loss = sess.run([TRAINING_OPERATION, LOSS_OPERATION], feed_dict = params)
             
-        validation_accuracy, validation_cost = evaluate(X_valid_preprocessed, y_valid)
+        validation_accuracy = evaluate(X_valid_preprocessed, y_valid)
         
         print("{:3d}".format(epoch), "VA = {:.3f}".format(validation_accuracy), 
-              "last training cost = {:.3f}".format(loss))
+              "cost est= {:.3f}".format(loss))
         
     saver.save(sess, './model')
     print("Model saved")
 
 
-# In[20]:
+# In[28]:
 
 # EVALUATE USING TEST DATA 
 
@@ -439,7 +440,7 @@ with tf.Session() as sess:
     print("Test Accuracy = {:.3f}".format(test_accuracy))
 
 
-# In[21]:
+# In[29]:
 
 ###################################
 #   Test the model on New Images #
@@ -472,7 +473,7 @@ own_set_y = np.array([0, 1, 12, 13, 14, 17, 18, 3, 36, 40])
 print(own_set_x.shape, own_set_y.shape)
 
 
-# In[29]:
+# In[31]:
 
 #show selected image from internet 
 
@@ -487,7 +488,7 @@ for i in range(number_of_images):
     axis[i].imshow(image)
 
 
-# In[31]:
+# In[34]:
 
 #CHECK HOW OUR SELECTED IMAGES FAIRED, AND ITS TOP 5 PREDICTION BASED on built-in top_k function 
 
