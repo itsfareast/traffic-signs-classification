@@ -10,6 +10,9 @@
 *PDF Writeup Ver2*
 - WRITEUP_ver2.pdf
 
+#### DATA
+- [.p files](https://www.dropbox.com/s/jupqa5nwey4bvgm/traffic-signs-data.zip?dl=0)
+
 ----
 
 ### Recommendations for Improvements
